@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Aisling O'Hare: physicist and data analyst in Belfast. PhD in Solar-Terrestrial Physics, Queen's University Belfast.">
+<title>Aisling O'Hare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column; hero pairs the name with an X-ray flux trace on GOES flare-class axes; sections are a left label rail + content. */
+:root{
+  --bg:#F3F5F6; --surface:#FFFFFF; --ink:#16212B; --muted:#5A6873; --rule:#D8DEE2;
+  --flare:#C4661F; --tec:#2D6F78; --grid:#E3E8EB;
+  --display:"Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body:"Newsreader", Georgia, "Times New Roman", serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F151B; --surface:#161E26; --ink:#E6ECEF; --muted:#94A3AD; --rule:#26323C;
+  --flare:#F0954A; --tec:#6FB7BF; --grid:#1E2830; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0F151B; --surface:#161E26; --ink:#E6ECEF; --muted:#94A3AD; --rule:#26323C;
+  --flare:#F0954A; --tec:#6FB7BF; --grid:#1E2830; color-scheme:dark }
+
+*{box-sizing:border-box}
+html{color-scheme:light}
+@media (prefers-color-scheme: dark){html{color-scheme:dark}}
+body{margin:0}
+img{max-width:100%}
+body{background:var(--bg);color:var(--ink);font:400 1.1rem/1.6 var(--body);padding-inline:20px;padding-block:0 64px}
+.wrap{max-width:960px;margin:0 auto}
+a{color:inherit;text-decoration-color:var(--flare);text-underline-offset:3px}
+a:hover{color:var(--flare)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--flare);outline-offset:3px;border-radius:2px}
+
+nav{display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:space-between;align-items:baseline;padding-block:22px;border-bottom:1px solid var(--rule);font:500 .8rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+nav .links{display:flex;flex-wrap:wrap;gap:8px 20px}
+nav a{text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:end;padding-block:56px 40px}
+.hero > *{min-width:0}
+.eyebrow{font:500 .78rem/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--tec);margin:0 0 14px}
+h1{font:700 clamp(2.8rem,7vw,4.6rem)/.95 var(--display);letter-spacing:-.025em;margin:0 0 22px;text-wrap:balance}
+.lede{font-size:1.3rem;line-height:1.45;max-width:30ch;margin:0 0 26px}
+.lede em{color:var(--flare);font-style:italic}
+.contact{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font:400 .88rem/1 var(--mono)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--rule);background:var(--surface);border-radius:3px;color:var(--ink);text-decoration:none}
+button.chip{cursor:pointer;font:inherit}
+.chip small{color:var(--muted);font-size:.75rem}
+
+figure.trace{margin:0;background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:14px 14px 10px}
+figure.trace canvas{display:block;width:100%;height:240px}
+figure.trace figcaption{font:400 .72rem/1.4 var(--mono);color:var(--muted);margin-top:8px}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-block:1px solid var(--rule);margin-bottom:24px}
+.stat{padding:18px 16px 18px 0}
+.stat + .stat{padding-left:16px;border-left:1px solid var(--rule)}
+.stat b{display:block;font:600 1.9rem/1 var(--display);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.stat span{font:400 .78rem/1.35 var(--mono);color:var(--muted)}
+
+section{display:grid;grid-template-columns:170px 1fr;gap:28px;padding-block:40px;border-bottom:1px solid var(--rule)}
+section > *{min-width:0}
+section h2{font:600 .8rem/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:6px 0 0;position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);align-self:start}
+p{margin:0 0 1em;max-width:65ch}
+
+.role{display:grid;gap:6px;padding-bottom:28px}
+.role:last-child{padding-bottom:0}
+.role-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;align-items:baseline}
+.role h3{font:600 1.3rem/1.2 var(--display);margin:0;letter-spacing:-.01em}
+.when{font:400 .8rem/1.3 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.org{color:var(--tec);font-style:italic}
+ul{margin:6px 0 0;padding-left:1.1em;max-width:65ch}
+li{margin-bottom:.45em}
+li::marker{color:var(--flare)}
+
+.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:24px 32px}
+.skills h3{font:600 1rem/1.2 var(--display);margin:0 0 8px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font:400 .78rem/1 var(--mono);padding:6px 8px;border:1px solid var(--rule);border-radius:2px;background:var(--surface)}
+
+.pubs{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.pubs li{display:grid;grid-template-columns:3.5rem 1fr;gap:12px;margin:0}
+.pubs .yr{font:500 .85rem/1.6 var(--mono);color:var(--flare);font-variant-numeric:tabular-nums}
+.pubs .doi{font:400 .8rem/1.4 var(--mono);color:var(--muted);word-break:break-all}
+.me{font-weight:500;text-decoration:underline;text-decoration-color:var(--tec);text-decoration-thickness:2px;text-underline-offset:3px}
+
+footer{padding-block:32px 0;font:400 .8rem/1.5 var(--mono);color:var(--muted)}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;padding-block:36px 28px;gap:28px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(3){padding-left:0;border-left:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--rule)}
+  section{grid-template-columns:1fr;gap:14px;padding-block:32px}
+  section h2{position:static}
+  .skills{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <nav aria-label="Sections">
+    <span>A. O'Hare</span>
+    <div class="links">
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#publications">Publications</a>
+      <a href="#education">Education</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Physicist · Data analyst · Belfast</p>
+      <h1>Aisling O'Hare</h1>
+      <p class="lede">I turn messy, multi-terabyte datasets into <em>clear evidence</em>, from solar flares to the GNSS signals they disrupt.</p>
+      <div class="contact">
+        <button class="chip" id="copy-email" type="button" aria-label="Copy email address">aislingohare01@gmail.com <small id="copy-label">copy</small></button>
+        <a class="chip" href="https://www.linkedin.com/in/aislingohare" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+    <figure class="trace">
+      <canvas id="flux" role="img" aria-label="Illustrative solar X-ray flux trace on a logarithmic scale, with GOES flare classes A, B, C, M and X marked, showing two flares rising above the background"></canvas>
+      <figcaption>Illustrative GOES 1–8 Å X-ray flux (W m⁻²), the kind of signal my PhD links to ionospheric response.</figcaption>
+    </figure>
+  </header>
+
+  <div class="stats" aria-label="At a glance">
+    <div class="stat"><b>&gt;4 TB</b><span>multi-source data cleaned and analysed</span></div>
+    <div class="stat"><b>4</b><span>peer-reviewed papers, 2 first-author</span></div>
+    <div class="stat"><b>8+</b><span>international conferences</span></div>
+    <div class="stat"><b>614M+</b><span>views from a 2025 press release</span></div>
+  </div>
+
+  <section id="about">
+    <h2>About</h2>
+    <div>
+      <p>I'm finishing a PhD in Solar-Terrestrial Physics at Queen's University Belfast, where I build automated Python pipelines that pull decades of observations from NASA and ESA spacecraft, global GNSS networks and radio observatories, then clean, join and analyse them to measure how the Sun affects Earth's upper atmosphere.</p>
+      <p>Before that I took a first-class MSci in Applied Mathematics and Physics, spent a summer in audit at EY, and spent three months at the European Space Agency. I like problems where the data is noisy, the stakes are practical, and the answer has to be explained clearly to people outside the field.</p>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <div>
+      <article class="role">
+        <div class="role-head"><h3>PhD Researcher</h3><span class="when">Oct 2023 – present</span></div>
+        <span class="org">Queen's University Belfast</span>
+        <ul>
+          <li>Collect, clean and validate datasets of more than 4 TB spanning decades of spacecraft, GNSS and radio observations, handling missing and erroneous data.</li>
+          <li>Build reproducible, automated Python pipelines that retrieve data from external APIs and databases, then filter, join and integrate independent sources.</li>
+          <li>Apply statistical testing, time-series and periodicity analysis, regression and uncertainty estimation to pull robust signals from noisy data.</li>
+          <li>Quantified the ionospheric response to solar flares, including response lags and periodic pulsations, with direct relevance to GNSS positioning, HF communication and space-weather warnings.</li>
+          <li>Lead projects end to end, from problem definition to publication.</li>
+        </ul>
+      </article>
+      <article class="role">
+        <div class="role-head"><h3>Visiting Researcher</h3><span class="when">May – Jul 2024</span></div>
+        <span class="org">European Space Agency, ESTEC, Netherlands</span>
+        <ul>
+          <li>One of seven participants selected through a competitive proposal and interview process for a fully funded placement.</li>
+          <li>Detected quasi-periodic pulsations in solar flare emission and their imprint on GNSS Total Electron Content; published in <i>JGR: Space Physics</i>.</li>
+        </ul>
+      </article>
+      <article class="role">
+        <div class="role-head"><h3>Audit Intern</h3><span class="when">Summer 2022</span></div>
+        <span class="org">EY, Belfast</span>
+        <ul>
+          <li>Reviewed and analysed financial documentation in Excel for accuracy and completeness, handling confidential client data.</li>
+          <li>Worked with clients on-site and remotely, preparing work for senior review to deadline.</li>
+        </ul>
+      </article>
+      <article class="role">
+        <div class="role-head"><h3>Teaching and Mentoring</h3><span class="when">2017 – present</span></div>
+        <span class="org">Queen's University Belfast and secondary schools</span>
+        <ul>
+          <li>Teach undergraduates Python programming and data analysis.</li>
+          <li>Co-supervise MSci research projects in data analysis; every student achieved a 2:1 or higher.</li>
+          <li>Taught GCSE maths and science at St Patrick's High School, Keady, and tutor maths and science one to one.</li>
+        </ul>
+      </article>
+      <article class="role">
+        <div class="role-head"><h3>Retail Supervisor</h3><span class="when">Jun 2021 – Oct 2023</span></div>
+        <span class="org">Gollogly's Spar, Keady</span>
+        <ul>
+          <li>Allocated staff tasks, handled cash reconciliation, and used stock and sales reports to order within budget.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div>
+        <h3>Programming and data</h3>
+        <div class="tags"><span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">Pandas</span><span class="tag">SciPy</span><span class="tag">Matplotlib</span><span class="tag">MATLAB</span><span class="tag">SQL (working)</span><span class="tag">API retrieval</span><span class="tag">Automated pipelines</span><span class="tag">HPC</span></div>
+      </div>
+      <div>
+        <h3>Quantitative</h3>
+        <div class="tags"><span class="tag">Statistical modelling</span><span class="tag">Regression</span><span class="tag">Time series</span><span class="tag">Signal processing</span><span class="tag">Uncertainty quantification</span><span class="tag">Mathematical modelling</span></div>
+      </div>
+      <div>
+        <h3>Tools</h3>
+        <div class="tags"><span class="tag">Excel</span><span class="tag">Pivot tables</span><span class="tag">Microsoft Office</span><span class="tag">LaTeX</span><span class="tag">Google Workspace</span><span class="tag">Linux CLI</span></div>
+      </div>
+      <div>
+        <h3>Scientific data</h3>
+        <div class="tags"><span class="tag">ESA Swarm</span><span class="tag">NASA SDO</span><span class="tag">NOAA GOES</span><span class="tag">PROBA2/LYRA</span><span class="tag">GNSS TEC</span><span class="tag">VLF radio</span><span class="tag">Magnetometers</span><span class="tag">Ionosondes</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="leadership">
+    <h2>Leadership</h2>
+    <ul>
+      <li>Co-lead an International Space Science Institute team in Bern, coordinating scientists across more than seven countries (2026 – present).</li>
+      <li>Member of the International Space Weather Action Team (2025 – present).</li>
+      <li>Founded and chair RADAR, a peer-support and accountability programme for PhD students at Queen's (2025 – present).</li>
+      <li>Invited seminar at Mullard Space Science Laboratory, UCL (Jan 2026); session chair at the UK Space Weather and Space Environment Meeting (2025) and COSPAR (2026).</li>
+      <li>Peer reviewer for <i>Space Weather</i> and assistant reviewer for <i>Nature Communications</i>.</li>
+      <li>Led a 2025 press release with 614M+ views and coverage in Newsweek and Phys.org; outreach through NI Science Festival, BBC, UTV, Belfast Telegraph and The Newsletter.</li>
+    </ul>
+  </section>
+
+  <section id="publications">
+    <h2>Publications</h2>
+    <ol class="pubs">
+      <li><span class="yr">2026</span><div>Bekker S. Z., <span class="me">O'Hare A. N.</span>, et al. <i>Journal of Geophysical Research: Space Physics</i><br><a class="doi" href="https://doi.org/10.1029/2026JA035779" target="_blank" rel="noopener">doi:10.1029/2026JA035779</a></div></li>
+      <li><span class="yr">2026</span><div>Greatorex H. J., <span class="me">O'Hare A. N.</span>, et al. <i>Solar Physics</i><br><a class="doi" href="https://doi.org/10.1007/s11207-026-02673-7" target="_blank" rel="noopener">doi:10.1007/s11207-026-02673-7</a></div></li>
+      <li><span class="yr">2025</span><div><span class="me">O'Hare A. N.</span>, et al. <i>Atmosphere</i><br><a class="doi" href="https://doi.org/10.3390/atmos16080937" target="_blank" rel="noopener">doi:10.3390/atmos16080937</a></div></li>
+      <li><span class="yr">2025</span><div><span class="me">O'Hare A. N.</span>, et al. <i>Journal of Geophysical Research: Space Physics</i><br><a class="doi" href="https://doi.org/10.1029/2024JA033493" target="_blank" rel="noopener">doi:10.1029/2024JA033493</a></div></li>
+    </ol>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div>
+      <article class="role">
+        <div class="role-head"><h3>PhD, Solar-Terrestrial Physics</h3><span class="when">2023 – 2027 (expected)</span></div>
+        <span class="org">Queen's University Belfast</span>
+        <p>Thesis: <i>Geoeffective Solar Flare Emission and its Impact on the Upper Ionosphere.</i></p>
+      </article>
+      <article class="role">
+        <div class="role-head"><h3>MSci, Applied Mathematics and Physics</h3><span class="when">2019 – 2023</span></div>
+        <span class="org">Queen's University Belfast · First-class honours</span>
+        <p>Modules include Financial Mathematics, Mathematical Modelling and Simulation, Partial Differential Equations, and Information Theory.</p>
+      </article>
+      <article class="role">
+        <div class="role-head"><h3>A Levels</h3><span class="when">Physics A* · Mathematics A · Chemistry A</span></div>
+      </article>
+    </div>
+  </section>
+
+  <footer>Aisling O'Hare · Belfast, Northern Ireland</footer>
+</div>
+
+<script>
+(function(){
+  // copy email
+  var btn=document.getElementById('copy-email'), lab=document.getElementById('copy-label');
+  btn.addEventListener('click',function(){
+    var t='aislingohare01@gmail.com';
+    function sel(){var r=document.createRange();r.selectNodeContents(btn.firstChild);var s=getSelection();s.removeAllRanges();s.addRange(r);lab.textContent='selected';}
+    try{navigator.clipboard.writeText(t).then(function(){lab.textContent='copied';setTimeout(function(){lab.textContent='copy'},1600)},sel)}catch(e){sel()}
+  });
+
+  // illustrative X-ray flux trace on GOES class axes (log10 W/m^2: A=-8 ... X=-4)
+  var cv=document.getElementById('flux');
+  var N=300, data=[], seed=7;
+  function rnd(){seed=(seed*16807)%2147483647;return seed/2147483647}
+  for(var i=0;i<N;i++){
+    var x=i/N, f=2.2e-7*(1+0.15*Math.sin(x*9));
+    f+=rnd()*3e-8;
+    function flare(t0,peak,rise,decay){var d=x-t0;return d<0?peak*Math.exp(-(d*d)/(2*rise*rise)):peak*Math.exp(-d/decay)}
+    f+=flare(0.30,2.4e-6,0.012,0.04)+flare(0.66,3.1e-5,0.015,0.07)*(1+0.12*Math.sin(x*420)*Math.exp(-Math.abs(x-0.67)*30));
+    data.push(Math.log10(f));
+  }
+  function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+  function draw(){
+    var dpr=window.devicePixelRatio||1, w=cv.clientWidth, h=cv.clientHeight;
+    cv.width=w*dpr; cv.height=h*dpr;
+    var c=cv.getContext('2d'); c.setTransform(dpr,0,0,dpr,0,0); c.clearRect(0,0,w,h);
+    var L=8, R=w-26, T=8, B=h-8, ymin=-8, ymax=-3.6;
+    function Y(v){return B-(v-ymin)/(ymax-ymin)*(B-T)}
+    var cls=['A','B','C','M','X'];
+    c.font='500 11px "JetBrains Mono", monospace'; c.textBaseline='middle';
+    for(var k=0;k<5;k++){
+      var y=Y(-8+k); c.strokeStyle=css('--grid'); c.lineWidth=1;
+      c.beginPath(); c.moveTo(L,Math.round(y)+.5); c.lineTo(R,Math.round(y)+.5); c.stroke();
+      // class label centred in its decade
+      var yl=Y(-8+k+0.5); if(yl>T+4){c.fillStyle=k>=3?css('--flare'):css('--muted'); c.fillText(cls[k],R+10,yl);}
+    }
+    // area + line
+    c.beginPath();
+    for(var i=0;i<N;i++){var x=L+i/(N-1)*(R-L), y=Y(data[i]); i?c.lineTo(x,y):c.moveTo(x,y)}
+    c.lineTo(R,B); c.lineTo(L,B); c.closePath();
+    c.globalAlpha=.12; c.fillStyle=css('--flare'); c.fill(); c.globalAlpha=1;
+    c.beginPath();
+    for(var j=0;j<N;j++){var x2=L+j/(N-1)*(R-L), y2=Y(data[j]); j?c.lineTo(x2,y2):c.moveTo(x2,y2)}
+    c.strokeStyle=css('--flare'); c.lineWidth=1.6; c.lineJoin='round'; c.stroke();
+  }
+  draw();
+  window.addEventListener('resize',draw);
+  try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw)}catch(e){}
+  new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  if(document.fonts) document.fonts.ready.then(draw);
+})();
+</script>
+
+</body>
+</html>
